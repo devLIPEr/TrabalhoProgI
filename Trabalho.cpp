@@ -118,8 +118,8 @@ int CheckObjetivos(int *inventory, int objetivos, int dim){
         {4, 0, 2, 1},//4 gravetos 2 pedras
         {1, 7, 1, 2},//1 fruta 1 animal
         {8, 1, 4, 3},//8 pedras 4 madeiras
-        {1, 5, 2, 2},//1 ferro 2 pedras
-        {1, 6, 1, 7} //1 mithril 1 ebony
+        {1, 4, 2, 2},//1 ferro 2 pedras
+        {1, 5, 1, 6} //1 mithril 1 ebony
     };
     for(int i = 0; i < NumberObjetivos-1; i++){
         if((objetivos >> i) & 1){

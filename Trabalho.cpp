@@ -112,7 +112,9 @@ void PrintObjetivos(){
     }
 }
 
-int CheckObjetivos(int *inventory, int objetivos, int dim){
+int objetivos = 0;
+int CheckObjetivos(int *inventory, int dim){
+    cout << objetivos << '\n';
     int requirements[NumberObjetivos-1][4] = {
         //Qnt, id Qnt, id
         {4, 0, 2, 1},//4 gravetos 2 pedras
@@ -122,7 +124,8 @@ int CheckObjetivos(int *inventory, int objetivos, int dim){
         {1, 5, 1, 6} //1 mithril 1 ebony
     };
     for(int i = 0; i < NumberObjetivos-1; i++){
-        if((objetivos >> i) & 1){
+        int id = (objetivos >> i);
+        if(id & 1){
             int count = 0;
             for(int j = 0; j < 4; j += 2){
                 if(inventory[requirements[i][j+1]] >= requirements[i][j]){
@@ -133,11 +136,14 @@ int CheckObjetivos(int *inventory, int objetivos, int dim){
                 inventory[requirements[i][1]] -= requirements[i][0];
                 inventory[requirements[i][3]] -= requirements[i][2];
                 objetivos -= 1 << i;
+                count = 0;
             }
         }
     }
     if(dim){
-        objetivos -= 1 << 5;
+        if(objetivos >> 5 & 1){
+            objetivos -= 1 << 5;
+        }
     }
     if(objetivos == 0){
         return 1;
@@ -181,7 +187,7 @@ int main(){
 
     int currDim = 0;
 
-    int objetivos = 0, objetivo = 1;
+    int objetivo = 1;
     cout << "Escolha os objetivos" << '\n';
     PrintObjetivos();
     while(cin >> objetivo && objetivo <= NumberObjetivos && objetivo){
@@ -236,6 +242,8 @@ int main(){
                 break;
             case 3:
                 exit(1);
+                break;
+            default:
                 break;
         }
         system("cls");
@@ -311,7 +319,7 @@ int main(){
                         itemPos[2] = player[2];
                     }
                 }
-                completed = CheckObjetivos(inventory, objetivos, currDim);
+                completed = CheckObjetivos(inventory, currDim);
             }
         }
         PrintMap(*currGrid[player[2]], width, height);

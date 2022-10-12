@@ -114,7 +114,6 @@ void PrintObjetivos(){
 
 int objetivos = 0;
 int CheckObjetivos(int *inventory, int dim){
-    cout << objetivos << '\n';
     int requirements[NumberObjetivos-1][4] = {
         //Qnt, id Qnt, id
         {4, 0, 2, 1},//4 gravetos 2 pedras
